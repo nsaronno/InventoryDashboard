@@ -77,6 +77,9 @@ def compute_shortage(df: pd.DataFrame) -> pd.DataFrame:
     """
     df = df.copy()
 
+    # Always normalize columns (cached objects may lose in-place changes)
+    df.columns = df.columns.str.strip().str.lower()
+
     # Coerce numeric columns
     df["bom.qty1"] = pd.to_numeric(df["bom.qty1"], errors="coerce").fillna(0)
     df["on.hand1"] = pd.to_numeric(df["on.hand1"], errors="coerce").fillna(0)
