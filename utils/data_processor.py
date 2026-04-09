@@ -61,8 +61,8 @@ def validate_columns(df: pd.DataFrame) -> list[str]:
 
     Returns a list of missing column names (empty list = all valid).
     """
-    # Normalize column names: strip whitespace, lowercase
-    df.columns = df.columns.str.strip()
+    # Normalize column names: strip whitespace and lowercase
+    df.columns = df.columns.str.strip().str.lower()
     missing = [col for col in REQUIRED_COLUMNS if col not in df.columns]
     return missing
 
