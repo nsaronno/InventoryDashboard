@@ -104,7 +104,7 @@ def render_sidebar_filters(df: pd.DataFrame) -> dict:
         # ═══════════════════════════════════════════
         with st.container(border=True):
             st.html(_section_label("📋", "Order Number", "#7eb8da"))
-            order_options = sorted(df["var.orno"].astype(str).unique().tolist())
+            order_options = sorted(df["var.orno"].dropna().astype(str).unique().tolist())
             selected_orders = st.multiselect(
                 "Filter by Order",
                 options=order_options,
@@ -124,7 +124,7 @@ def render_sidebar_filters(df: pd.DataFrame) -> dict:
         # ═══════════════════════════════════════════
         with st.container(border=True):
             st.html(_section_label("🏷️", "Item Code", "#81d4a8"))
-            item_options = sorted(df["bom.item1"].astype(str).unique().tolist())
+            item_options = sorted(df["bom.item1"].dropna().astype(str).unique().tolist())
             selected_items = st.multiselect(
                 "Filter by Item",
                 options=item_options,
